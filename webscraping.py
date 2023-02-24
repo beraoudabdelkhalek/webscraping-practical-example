@@ -1,3 +1,4 @@
+#this code was used in a DRF function based view
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -5,6 +6,7 @@ def lancerwebscraping(request):
     scrapingtime=int(request.data['scrapingtime'])
     scrapingtime=scrapingtime // 2
     pagecpt=1
+    #for scraping all pages
     while pagecpt <= scrapingtime:
         if pagecpt==1:
             page=requests.get("http://www.annonce-algerie.com/AnnoncesImmobilier.asp").text
@@ -13,8 +15,9 @@ def lancerwebscraping(request):
         time.sleep(5)
         soup=BeautifulSoup(page,'lxml')
         anchors=soup.find_all('a')
-        #avoir touts les liens vers les annonces dans le tableau des immobiliers
+        #get all links for the posts in the real estate posts table
         for anchor  in anchors :
+            #cleaning data to use it with my model to save in the database
             lien=anchor["href"]
             if "cod_ann" in lien:
                 pagedetail=requests.get(f"http://www.annonce-algerie.com/{lien}").text
@@ -72,5 +75,6 @@ def lancerwebscraping(request):
                 commune=comm)
                 for value in imagelist:                
                         Image.objects.create(lien=value,annonce=annonce)
+        #go to the next page
         pagecpt=pagecpt+1
-    return Response("operation terminer")
+    return Response("finished")
