@@ -1,5 +1,5 @@
 # webscraping-practical-example
-a webscraping tutorial using BeautifulSoup and python, with advices for webscraping and a practical example
+a webscraping tutorial using BeautifulSoup and python, with advice for webscraping and a practical example
 - you can find the official documentation of beautifulsoup4 on their website https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 # tips and advices
 - In case of provided API, try to avoid Web Scraping.
